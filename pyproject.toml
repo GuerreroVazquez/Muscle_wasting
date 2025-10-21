@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "mirkat-suite"  # distribution name (must be unique on PyPI)
 version = "0.1.0"
-description = "A bioinformatics pipeline for transcriptomic analysis of muscle wasting conditions"
+description = "miRKat: A suite to uncover miRNA regulatory networks and identify key miRNAs in complex biological contexts such as muscle ageing and sarcopenia, leveraging transcriptomic data."
 readme = "README.md"
 requires-python = ">=3.8"
 license = { text = "MIT" }
