@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mirkat-suite"  # distribution name (must be unique on PyPI)
+version = "0.1.0"
+description = "A bioinformatics pipeline for transcriptomic analysis of muscle wasting conditions"
+readme = "README.md"
+requires-python = ">=3.8"
+license = { text = "MIT" }
+authors = [
+  { name = "Karen Guerrero-Vazquez", email = "GuerreroVazquez.Karen@gmail.com" }
+]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Operating System :: OS Independent",
+  "License :: OSI Approved :: MIT License",
+  # optionally more: e.g. "Topic :: Scientific/Engineering :: Bio-Informatics"
+]
+dependencies = [
+  "pandas",
+  "numpy",
+  "scipy",
+  "statsmodels",
+  "networkx",
+  "gseapy",
+  "py4cytoscape",
+  "pytest"
+  # … plus any extras
+]
+
+[project.urls]
+Homepage = "https://github.com/GuerreroVazquez/Muscle_wasting"
+Source = "https://github.com/GuerreroVazquez/Muscle_wasting"
