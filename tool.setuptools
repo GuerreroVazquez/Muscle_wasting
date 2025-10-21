@@ -1,0 +1,4 @@
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["Muscle_wasting", "Muscle_wasting.*"]
+exclude = ["Tests", "data", "Databases"]
