@@ -41,7 +41,7 @@ tail -n +2 "$CSV_FILE" | while IFS=',' read -r -a VALUES; do
                     CUT=($value)
                     YAML_CONTENT+="page_rank_cutoff: [${CUT[*]}]\n"
                     ;;
-                coeff_dds|coeff_tissue|coeff_cellular|coeff_pathways_svd|coeff_tf)
+                coeff_dds|coeff_tissue|coeff_cell_type|coeff_pathways_svd|coeff_tf)
                     base_key="${key#coeff_}"
                     coeffs["$base_key"]="$value"
                     ;;
@@ -50,7 +50,7 @@ tail -n +2 "$CSV_FILE" | while IFS=',' read -r -a VALUES; do
     done
 
     COEFF_YAML="coefficients: {"
-    for key in dds tissue cellular pathway_svd tf; do
+    for key in dds tissue cell_type pathways_svd tf; do
         val="${coeffs[$key]:-1}"
         COEFF_YAML+="'$key': $val, "
     done

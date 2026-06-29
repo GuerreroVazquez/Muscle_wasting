@@ -113,3 +113,15 @@ def get_mirna_target_enriched(selected_genes, title, msigdb):
     enriched_pathways = pathway_df['Combined score']
     return plot_ora_results(pathway_df, top_n=10, figsize=(12, 6), scale_odds_ratio=.5,
                      fontsize_title=12, fontsize_subtitle=12, fontsize_text=10,title=title)
+def get_mirna_target_enriched_df(selected_genes, title, msigdb):
+    enriched = dc.get_ora_df(
+            df=selected_genes,
+            net=msigdb,
+            source='geneset',
+            target='genesymbol'
+        )
+    pathway_df = enriched[enriched['FDR p-value'] < 0.1]
+    pathway_df.index = pathway_df["Term"]
+    #pathway_df.set_index("Term", inplace=True)  # Set "Term" as index
+    enriched_pathways = pathway_df['Combined score']
+    return enriched_pathways, pathway_df

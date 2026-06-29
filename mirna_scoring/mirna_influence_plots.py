@@ -118,7 +118,12 @@ def plot_pathways_keyword_heatmap(mir_pathway_influence_df):
     sns.heatmap(mir_pathway_influence_df_n0, cmap="YlOrBr", annot=True)
 
 
-def plot_mirnas_similarirty(dist_df):
+def plot_mirnas_similarirty(dist_df, save_path=None):
+    """
+    Plots a heatmap of the distance matrix, sorted by the mean distance of each mi
+    :param dist_df: DataFrame containing the distance matrix
+    :param save_path: If provided, saves the heatmap as an image file
+    """
     sorted_index = dist_df.mean().sort_values().index  # Sorting by mean distance
 
     # Apply sorting to the DataFrame
@@ -130,6 +135,8 @@ def plot_mirnas_similarirty(dist_df):
     plt.figure(figsize=(size_l, size_l))
     sns.heatmap(sorted_df, annot=False, cmap='coolwarm')  # , linewidths=0.5)#, linecolor='black')
     plt.title('Sorted Distance Matrix Heatmap')
+    if save_path:
+        plt.savefig(save_path, dpi=300, bbox_inches="tight")
     plt.show()
 
 

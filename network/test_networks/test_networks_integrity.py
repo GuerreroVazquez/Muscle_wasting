@@ -52,6 +52,53 @@ def test_full_flow_genes_tf(monkeypatch):
     print(network)
     assert len(network.nodes()) == 7, f"The test network ALDOA should have 6 genes to start and 11 mirnas."
 
+def test_full_flow_genes_tf_2(monkeypatch):
+    import pandas as pd
+
+    yml_path = "/home/karen/Documents/GitHub/Muscle_wasting/UseCases/Sarcopenia/configurations_YML"
+    networks =[]
+    coefs = []
+    for i in range(1,9):
+        confs_yml_path = f"{yml_path}/config_{i}.yml"
+        with open(confs_yml_path, 'r') as file:
+            config_data = yaml.safe_load(file)
+            name_n = f"Configuration_{i}"
+            file = config_data["oNetwork"]
+            path_tissue_data = config_data['path_tissue_data']
+            path_dds_data = config_data['path_DDS_data']
+            pathway_file = config_data['path_pathway_file']
+            tf_file = config_data['path_tf_file']
+            cell_type_file = config_data['path_cell_type_data']
+            coefficents = config_data['coefficients']
+            coefs.append(coefficents)
+
+            dds_df = pd.read_csv(path_dds_data, index_col=0).fillna(0)
+            tissue_df = pd.read_csv(path_tissue_data, index_col=0).fillna(0)
+            cell_type_df = pd.read_csv(cell_type_file, index_col=0).fillna(0)
+
+
+            network, _ = mp.full_flow_genes_tf(cytoscape_network=file,
+                                            name= name_n,
+                                            dds_df= dds_df,
+                                            tissue_df=tissue_df,
+                                            tf_file=tf_file,
+                                            pathway_file=pathway_file,
+                                            cell_type=cell_type_df,
+                                            coefficients=coefficents,
+                                            path="/home/karen/Documents/GitHub/Muscle_wasting/UseCases/Sarcopenia/output/",
+                                            cutoff=0.9)
+            networks.append(network)
+
+    print(networks)
+    print(coefs)
+    assert not all(x==networks[0] for x in networks)
+    nodes_1 = set(networks[0].nodes)
+    nodes_2 = set(networks[1].nodes)
+    nodes_3 = set(networks[2].nodes)
+    same_networks = set(networks[1].nodes) == set(networks[2].nodes)
+    same_networks = set(networks[1].nodes) == networks[2]
+
+
 def test_remove_nodes(monkeypatch):
 
         monkeypatch.setattr(

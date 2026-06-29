@@ -57,3 +57,4 @@ mirna_scoring/.ipynb_checkpoints/mirna_impact-checkpoint.py
 mirkitten/.ipynb_checkpoints/run_pathway-checkpoint.py
 mirkitten/.ipynb_checkpoints/Pathway-checkpoint.py
 mirkitten/data/.ipynb_checkpoints/dds_files-checkpoint.yml
+*.h5ad

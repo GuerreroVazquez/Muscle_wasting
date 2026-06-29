@@ -14,6 +14,10 @@ pwd = os.getcwd()
 print(pwd)
 import argparse
 import create_network as cn
+import logging
+# Set up logging to mitkitten.log
+logging.basicConfig(filename='mirkitten.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
 
 if __name__ == '__main__':
 
@@ -39,6 +43,8 @@ if __name__ == '__main__':
     if args.interest not in ['stat', 'log2FoldChange']:
         raise ValueError('Interest must be in ["stat", "log2FoldChange"]')
 
+    logging.info(f'Running network creation with dds_files: {args.dds_files}, only_DE: {args.only_DE}, \
+                 threshold: {args.threshold}, pvalue: {args.pvalue}, interest: {args.interest}, save_name: {args.save_name}')
     network = cn.new_network(args.dds_files, only_DE=args.only_DE, threshold=args.threshold, pvalue=args.pvalue,
                              interest=args.interest, save_name=args.save_name)
     network.collect_genes()
